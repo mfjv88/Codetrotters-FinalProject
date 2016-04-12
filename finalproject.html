@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Text Based RPG</title>
+  <script type="text/javascript" src="assets/js/jquery.js"></script>
+  <script type="text/javascript" src="assets/js/finalproject.js"></script>
+  <script type="text/javascript" src="assets/js/bootstrap.js"></script>
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/finalproject.css">
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div id="nav" class="row">
+      <div class="col-xs-1">
+        <span>Logo</span>
+      </div>
+      <div class="col-xs-1 col-xs-offset-8">
+        <span>Sign in</span>
+      </div>
+      <div class="col-xs-1">
+        <span>About Us</span>
+      </div>
+      <div class="col-xs-1">
+        <span>More</span>
+      </div>
+    </div>
+  </div>
+  <div id="main" class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3 frame">
+        <!--Here starts the grid system-->
+        <div id="grid" class="row">
+          <div id="graphics" class="col-xs-12 col-sm-6 frame">
+            <!--Row 1 in Area-->
+            <div class="row">
+              <div class="col-xs-2" id="tile00"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile01"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile02"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile03"> <img src="assets\images\BlueSwordSoldier.png" alt="Orc" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile04"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile05"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+            </div>
+            <!--Row 2 in Area-->
+            <div class="row">
+              <div class="col-xs-2" id="tile10"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile11"> <img src="assets\images\GreenSwordSoldier.png" alt="Goblin" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile12"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile13"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile14"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile15"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+            </div>
+            <!--Row 3 in Area-->
+            <div class="row">
+              <div class="col-xs-2" id="tile20"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile21"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile22"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile23"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile24"> <img src="assets\images\GreenSwordSoldier.png" alt="Goblin" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile25"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+            </div>
+            <!--Row 4 in Area-->
+            <div class="row">
+              <div class="col-xs-2" id="tile30"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile31"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile32"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile33"> <img src="assets\images\Boulder.png" alt="boulder" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile34"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile35"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+            </div>
+            <br>
+            <!--Row 5 in Area-->
+            <div class="row">
+              <div class="col-xs-2" id="tile40"> <img src="assets\images\link.gif" alt="hero" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile41"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile42"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile43"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile44"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+              <div class="col-xs-2" id="tile45"> <img src="assets\images\floor.png" alt="tile" width="40px" />
+              </div>
+            </div>
+          </div>
+          <!-- Here is the prompt-->
+          <div id="prompt" class="col-xs-12 col-sm-6 frame">
+            <div>
+
+              Prompt
+
+            </div>
+          </div>
+        </div>
+          <!--Here are the controls-->
+          <div id="controls" class="container-fluid">
+            <div class="row">
+              <div class="col-xs-12 frame">
+                <div class="row">
+                  <div class="col-xs-1 col-xs-offset-5">
+                    <button id="up" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('up')">Up</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-1 col-xs-offset-2">
+                    <button id="left" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('left')">Left</button>
+                  </div>
+                  <div class="col-xs-1 col-xs-offset-4">
+                    <button id="right" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('right')">Right</button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-xs-1 col-xs-offset-5">
+                    <button id="down" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('down')">Down</button>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                  <div class="col-xs-1">
+                    <button type="button" id="battle" class="btn btn-primary btn-lg active" name="button" onclick="fight()">Battle</button>
+                  </div>
+                  <div class="col-xs-1 col-xs-offset-2">
+                    <button type="button" id="flee" class="btn btn-primary btn-lg active" name="button" onclick="flee()">Flee</button>
+                  </div>
+                  <div class="col-xs-1 col-xs-offset-2">
+                    <button type="button" id="attack" class="btn btn-primary btn-lg active" name="button" onclick="">Attack</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--<div class="row">
+          <div class="col-xs-12">
+            <input type="text" name="name" value="Enter command here"> </input>
+          </div>
+        </div>
+      </div>-->
+</body>
+
+</html>

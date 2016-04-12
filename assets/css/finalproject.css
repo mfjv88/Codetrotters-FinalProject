@@ -1,0 +1,47 @@
+body{
+  background-color: black;
+}
+
+.frame {
+  border: double;
+  background-color: rgba(255, 255, 255, 0.5);
+  /*transform: translate(-50px, -50px);*/
+}
+
+#main {
+  padding-top: 4%;
+}
+
+#grid {
+  /*position: relative;
+  min-width: 500px;
+  max-width: 1500px;*/
+  float: none;
+  /*text-align: center;*/
+  height: 100%;
+}
+
+#prompt {
+height: 296px;
+overflow-y: scroll;
+}
+
+#nav {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: white;
+  height: 30px;
+}
+
+#nav > div > span {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 10px;
+}
+
+#graphics {
+  padding: none;
+}
+
+#controls {
+  float: none;
+  padding: 0px;
+}
