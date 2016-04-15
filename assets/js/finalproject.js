@@ -5,6 +5,7 @@ $( document ).ready(function() {
     $('#attack').hide();
     $('#flee').hide();
     $('#battle').hide();
+    $(".attacking").on('click', "#attack", battle);
 });
 
 /*The area and each number is being defined as a component within the area of the game*/
@@ -16,27 +17,28 @@ var area = [
   [4, 1, 1, 1, 1, 1],
 ];
 
-var currentMonster = null;
-var turn = null;
-var goblin = {
+currentMonster = null;
+turn = null;
+goblin = {
   rep: 2,
   hp: 5,
-  attack: Math.floor(Math.random() * 2),
-  defense: Math.floor(Math.random() * 2)
+  attack: 2,
+  defense: 0,
+  currentPosition: [{x: 1, y: 1, id: 1}, {x: 4, y: 2, id:2}]
 };
 
-var orc = {
+orc = {
   rep: 3,
   hp: 10,
-  attack: Math.floor(Math.random() * 3),
-  defense: Math.floor(Math.random() * 3)
+  attack: 4,
+  defense: 2
 };
 
-var hero = {
+hero = {
   rep: 4,
   hp: 20,
-  attack: Math.ceil(Math.random() * 3),
-  defense: Math.ceil(Math.random() * 3),
+  attack: 4,
+  defense: 1,
   currentPosition: {x: 0, y: 4}
 };
 
@@ -50,30 +52,43 @@ var walk = {
 
 
 /*All the functions within the game are being defined in this section*/
-var action = function() {
-  switch (action) {
-    case "move":
-      move();
-      break;
-    case "look":
-      console.log(checkArea());
-      break;
-  }
-};
 
-var heroDamage = this.hp -= (hero.attack - this.defense);
+// var heroDamage = this.hp -= (hero.attack - this.defense);
 
-var monsterDamage = hero.hp -= (this.attack - hero.defense);
+// var monsterDamage = hero.hp -= (this.attack - hero.defense);
 
 /*Work in progress*/
 var battle = function() {
-  while(goblin.hp <= 0 || hero.hp <= 0) {
-    if(turn === true) {
-      goblin.hp -= (hero.attack - this.defense);
-      hero.hp -= (this.attack - hero.defense);
-      turn = false;
-    }
+  console.log(currentRep, currentMonster);
+  if (currentRep === 2) {
+    currentMonster = goblin;
+  } else {
+    currentMonster = orc;
   }
+  while((currentRep === 2 || currentRep === 3) && (currentMonster.hp > 0 || hero.hp > 0)) {
+    hero.hp -= (currentMonster.attack - hero.defense);
+    $("#prompt").append("You hit the monster and did " + hero.attack + " damage!" + "<br>");
+    currentMonster.hp -= (hero.attack - currentMonster.defense);
+    $("#prompt").append("The monster did " + currentMonster.attack + " damage!" + "<br>");
+    if(currentMonster.hp < 1) {
+      $("#prompt").append("You killed the monster" + "<br>");
+      area[currentMonster.currentPosition.y][currentMonster.currentPosition.x] = 1;
+      $('#tile'+currentMonster.currentPosition.y+currentMonster.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+      flee();
+      break;
+    } else if(hero.hp < 1) {
+      $("#prompt").append("You died" + "<br>");
+      area[hero.currentPosition.y][hero.currentPosition.x] = 1;
+      $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+      break;
+    }
+    break;
+  }
+};
+
+
+
+/*
   while (battle === true) {
     switch (battle_options) {
       case "attack":
@@ -92,13 +107,13 @@ var battle = function() {
         };
         break;
       case "run":
-        move(back);
+        flee();
         break;
       default:
         $("#prompt").append("This is not a command! Try again!" + "<br>");
     };
   };
-};
+};*/
 
 var checkArea = function(x, y) {
 
@@ -106,11 +121,16 @@ var checkArea = function(x, y) {
   if (currentRep === 1) {
     return true;
   } else if (currentRep === 0) {
+    $("#prompt").append("There is a wall here!" + "<br>")
     return false;
   } else if (currentRep === 2 || currentRep === 3) {
     $("#prompt").append("There is a monster here." + "<br>");
     $('#flee').show();
     $('#battle').show();
+    $('#up').hide();
+    $('#left').hide();
+    $('#down').hide();
+    $('#right').hide();
     currentMonster = { x: x, y: y};
     return false;
     // if (confirm("Do you want to battle?" === true)) {
@@ -126,7 +146,7 @@ var checkArea = function(x, y) {
   };
 };
 
-var flee = function() {
+flee = function() {
   $('#attack').hide();
   $('#flee').hide();
   $('#battle').hide();
@@ -138,17 +158,12 @@ var flee = function() {
 }
 
 var fight = function() {
-  $('#up').hide();
-  $('#left').hide();
-  $('#down').hide();
-  $('#right').hide();
   $('#attack').show();
   $('#flee').hide();
   $('#battle').hide();
-  battle();
 }
 
-var move = function(move) {
+move = function(move) {
   var temp = null;
   switch (move) {
     case "up":
@@ -166,7 +181,7 @@ var move = function(move) {
         $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
         console.log(area[hero.currentPosition.y][hero.currentPosition.x], area[hero.currentPosition.y][hero.currentPosition.x]);
       } else {
-        console.log ('cant do that fool' + "<br>");
+        // $("#prompt").append("Can't do that fool" + "<br>");
         //$('#propt').append('')
       }
       break;
@@ -185,7 +200,7 @@ var move = function(move) {
         $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
         console.log(area[hero.currentPosition.y][hero.currentPosition.x], area[hero.currentPosition.y][hero.currentPosition.x]);
       } else {
-        $("#prompt").append('cant do that fool'  + "<br>");
+        //$("#prompt").append("Can't do that fool!"  + "<br>");
         //$('#propt').append('')
       }
       break;
@@ -204,7 +219,7 @@ var move = function(move) {
         $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
         console.log(area[hero.currentPosition.y][hero.currentPosition.x], area[hero.currentPosition.y][hero.currentPosition.x]);
       } else {
-        $("#prompt").append('cant do that fool' + "<br>");
+        // $("#prompt").append('cant do that fool' + "<br>");
         //$('#propt').append('')
       }
       break;
@@ -223,7 +238,7 @@ var move = function(move) {
         $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
         console.log(area[hero.currentPosition.y][hero.currentPosition.x], area[hero.currentPosition.y][hero.currentPosition.x]);
       } else {
-        $("#promp").append('cant do that fool' + "<br>");
+        //$("#promp").append('cant do that fool' + "<br>");
         //$('#propt').append('')
       }
       break;
