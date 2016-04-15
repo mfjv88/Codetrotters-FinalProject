@@ -72,9 +72,14 @@ var battle = function() {
     $("#prompt").append("The monster did " + currentMonster.attack + " damage!" + "<br>");
     if(currentMonster.hp < 1) {
       $("#prompt").append("You killed the monster" + "<br>");
+      $('#attack').hide();
+      $('#up').show();
+      $('#left').show();
+      $('#down').show();
+      $('#right').show();
       area[currentMonster.currentPosition.y][currentMonster.currentPosition.x] = 1;
       $('#tile'+currentMonster.currentPosition.y+currentMonster.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
-      flee();
+      ;
       break;
     } else if(hero.hp < 1) {
       $("#prompt").append("You died" + "<br>");
