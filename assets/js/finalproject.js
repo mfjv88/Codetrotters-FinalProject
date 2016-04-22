@@ -23,18 +23,36 @@ $(document).ready(function() {
       $('#close').show();
       theme = new Audio('C:\\Users\\mvacas.GUAYACAN\\Desktop\\Codetrotters\\Final Project\\codetrotters-finalproject\\assets\\sound\\theme.mp3');
       theme.play();
+      theme.volume = 0.3;
     });
   });
+
   $("#speaker").on("click", function() {
     theme.pause();
     $("#speakermute").show();
     $("#speaker").hide();
   });
+
   $("#speakermute").on("click", function() {
     theme.play();
     $("#speaker").show();
     $("#speakermute").hide();
   });
+
+  $(".footerItems").hover(function(){
+    $(this).css("opacity", "0.4");
+    $(this).css("filter", "alpha(opacity=40)");
+    }, function(){
+    $(this).css("opacity", "1");
+    $(this).css("filter", "alpha(opacity=100)");
+  });
+
+  $(".nav-items").hover(function(){
+    $(this).css("color", "gray");
+    }, function(){
+    $(this).css("color", "white");
+  });
+
 });
 
 var wall = new Audio('assets/sound/wall.mp3');
