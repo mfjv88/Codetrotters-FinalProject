@@ -5,6 +5,8 @@ body{
 .frame {
   border: double;
   background-color: rgba(255, 255, 255, 0.5);
+  /*flex: auto;
+  justify-content: space-between;*/
   /*transform: translate(-50px, -50px);*/
 }
 
@@ -32,12 +34,27 @@ overflow-y: scroll;
 #nav {
   background-color: rgba(255, 0, 0, 0.5);
   color: white;
-  height: 30px;
-  padding: 4px;
+  height: 40px;
+  padding: 0px;
 }
 
-#nav > div > span {
-  /*background-color: rgba(255, 255, 255, 0.5);*/
+#logo {
+  display: flex;
+  justify-content: flex-start;
+  float: left;
+  padding: 0px;
+}
+
+.nav-items {
+  padding-top: 10px;
+}
+
+#speaker {
+  padding: 0px;
+}
+
+#speakermute {
+  padding: 0px;
 }
 
 #graphics {
@@ -50,20 +67,28 @@ overflow-y: scroll;
 }
 
 #footer {
+  display: flex;
+  align-items: center;
   background-color: rgba(255, 0, 0, 0.5);
+  font-size: 18px;
   color: white;
-  padding: 4px;
   position: fixed;
   bottom: 0px;
   width: 100%;
-  height: 60px;
+  height: 80px;
 }
 
-#footer span {
-  font-size: 18px;
-  margin-top: 30px;
+.footerItems {
+  font-size: 20px;
+  bottom: 5px;
+  padding-top: 10px;
 }
 
 #tile {
   padding: 5px;
+}
+
+.type-it {
+  font-size: 24px;
+  font-family: sans-serif;
 }

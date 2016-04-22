@@ -1,11 +1,43 @@
 /*This is a Text based RPG Game*/
 
-$( document ).ready(function() {
-    $('#attack').hide();
-    $('#flee').hide();
-    $('#battle').hide();
-    $(".attacking").on('click', "#attack", battle);
+$(document).ready(function() {
+  $("#speakermute").hide()
+  $('#close').hide();
+  $('#attack').hide();
+  $('#flee').hide();
+  $('#battle').hide();
+  $(".attacking").on('click', "#attack", battle);
+  $('#myModal').on('shown.bs.modal', function() {
+    $('#myInput').focus()
+  })
+  $('#myModal').modal('show');
+  // $('.play').on('click', '.type-it', typeIt);
+  $('.play').on('click', function() {
+    $('.type-it').typeIt({
+      strings: ['This is the story of a princess', 'that was captured by an evil orc.', 'The prince, Lazarus, came to the rescue.', 'Help Lazarus find his princess', 'by fighting the evil orc at this end of the stage!'],
+      speed: 50,
+      lifeLike: true,
+      cursor: true
+    }).after(function() {
+      $('.play').hide();
+      $('#close').show();
+      theme = new Audio('C:\\Users\\mvacas.GUAYACAN\\Desktop\\Codetrotters\\Final Project\\codetrotters-finalproject\\assets\\sound\\theme.mp3');
+      theme.play();
+    });
+  });
+  $("#speaker").on("click", function() {
+    theme.pause();
+    $("#speakermute").show();
+    $("#speaker").hide();
+  });
+  $("#speakermute").on("click", function() {
+    theme.play();
+    $("#speaker").show();
+    $("#speakermute").hide();
+  });
 });
+
+var wall = new Audio('assets/sound/wall.mp3');
 
 /*The area and each number is being defined as a component within the area of the game*/
 var area = [
@@ -25,7 +57,11 @@ goblin1 = {
   hp: 5,
   attack: 2,
   defense: 0,
-  currentPosition: {x: 1, y: 1, id: 1}
+  currentPosition: {
+    x: 1,
+    y: 1,
+    id: 1
+  }
 };
 
 goblin2 = {
@@ -33,7 +69,11 @@ goblin2 = {
   hp: 5,
   attack: 2,
   defense: 0,
-  currentPosition: {x: 4, y: 2, id:2}
+  currentPosition: {
+    x: 4,
+    y: 2,
+    id: 2
+  }
 };
 
 orc = {
@@ -41,7 +81,11 @@ orc = {
   hp: 10,
   attack: 4,
   defense: 2,
-  currentPosition: {x: 3, y: 0, id:3}
+  currentPosition: {
+    x: 3,
+    y: 0,
+    id: 3
+  }
 };
 
 hero = {
@@ -49,7 +93,10 @@ hero = {
   hp: 20,
   attack: 4,
   defense: 1,
-  currentPosition: {x: 0, y: 4}
+  currentPosition: {
+    x: 0,
+    y: 4
+  }
 };
 
 var wall = {
@@ -67,7 +114,6 @@ treasure = {
 
 /*All the functions within the game are being defined in this section*/
 var battle = function() {
-  console.log(currentRep, currentMonster);
   if (currentRep === 2) {
     if ((hero.currentPosition.x === 1 && hero.currentPosition.y === 2) || (hero.currentPosition.x === 2 && hero.currentPosition.y === 1)) {
       currentMonster = goblin1;
@@ -77,12 +123,14 @@ var battle = function() {
   } else {
     currentMonster = orc;
   }
-  while((currentRep === 2 || currentRep === 3) && (currentMonster.hp > 0 || hero.hp > 0)) {
+  while ((currentRep === 2 || currentRep === 3) && (currentMonster.hp > 0 || hero.hp > 0)) {
+    var sword = new Audio('assets/sound/sword.mp3')
+    sword.play();
     hero.hp -= (currentMonster.attack - hero.defense);
     $("#prompt").append("You hit the monster and did " + hero.attack + " damage!" + "<br>");
     currentMonster.hp -= (hero.attack - currentMonster.defense);
     $("#prompt").append("The monster did " + currentMonster.attack + " damage!" + "<br>");
-    if(currentMonster.hp < 1) {
+    if (currentMonster.hp < 1) {
       $("#prompt").append("You killed the monster" + "<br>");
       $('#attack').hide();
       $('#up').show();
@@ -93,29 +141,29 @@ var battle = function() {
         case goblin1:
           console.log(goblin1)
           area[goblin1.currentPosition.y][goblin1.currentPosition.x] = 1;
-          $('#tile'+ goblin1.currentPosition.y + goblin1.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
-          ;
+          $('#tile' + goblin1.currentPosition.y + goblin1.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");;
           break;
         case goblin2:
           console.log(goblin2)
           area[goblin2.currentPosition.y][goblin2.currentPosition.x] = 1;
-          $('#tile'+ goblin2.currentPosition.y + goblin2.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
-          ;
+          $('#tile' + goblin2.currentPosition.y + goblin2.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");;
           break;
         case orc:
           area[orc.currentPosition.y][orc.currentPosition.x] = 5;
           console.log(area[0][3]);
           bossDefeated = true;
           $('#tile03').html("<img src='assets\\images\\chest.png' id='chest' alt='chest' width='40px'/>");
+          var treasure = new Audio('assets\\sound\\treasure.mp3')
+          treasure.play();
           break;
         default:
           break;
       }
       break;
-    } else if(hero.hp < 1) {
+    } else if (hero.hp < 1) {
       $("#prompt").append("You died" + "<br>");
       area[hero.currentPosition.y][hero.currentPosition.x] = 1;
-      $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+      $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
       break;
     }
     break;
@@ -128,6 +176,8 @@ var checkArea = function(x, y) {
   if (currentRep === 1) {
     return true;
   } else if (currentRep === 0) {
+    var wall = new Audio('assets/sound/wall.mp3');
+    wall.play();
     $("#prompt").append("There is a wall here!" + "<br>")
     return false;
   } else if (currentRep === 2 || currentRep === 3) {
@@ -138,11 +188,16 @@ var checkArea = function(x, y) {
     $('#left').hide();
     $('#down').hide();
     $('#right').hide();
-    currentMonster = { x: x, y: y};
+    currentMonster = {
+      x: x,
+      y: y
+    };
     return false;
   } else if (currentRep === 5) {
-    $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
-    $('#tile'+'0'+hero.currentPosition.x).html("<img src='assets\\images\\linktriforce.png' alt='treasure' width='40px'/>")
+    var item = new Audio('assets/sound/item.mp3');
+    item.play();
+    $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+    $('#tile' + '0' + hero.currentPosition.x).html("<img src='assets\\images\\linktriforce.png' alt='treasure' width='40px'/>")
     $("#prompt").append("You find the treasure!" + "<br>");
     $("#prompt").append("You passed the level!" + "<br>");
     $('#up').hide();
@@ -151,6 +206,8 @@ var checkArea = function(x, y) {
     $('#right').hide();
     return true;
   } else {
+    var wall = new Audio('assets/sound/wall.mp3');
+    wall.play();
     $("#prompt").append("Can't go there fool!" + "<br>");
     return false;
   };
@@ -173,83 +230,124 @@ var fight = function() {
   $('#battle').hide();
 }
 
+/*Mousetrap.bind('up', function() {
+  if (hero.currentPosition.y - 1 > 5 || hero.currentPosition.y - 1 < 0) {
+    $("#prompt").append("Can't go there fool!" + "<br>");
+    return false;
+  }
+  var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y - 1);
+  if (canMove) {
+    if (!bossDefeated) {
+      area[hero.currentPosition.y][hero.currentPosition.x] = 1;
+      $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+      hero.currentPosition.y -= 1;
+      area[hero.currentPosition.y][hero.currentPosition.x] = 4;
+      $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+    } else {}
+  } else {}
+  break;
+});
+
+Mousetrap.bind({
+  "right": function() {
+    if (hero.currentPosition.x + 1 > 5 || hero.currentPosition.x + 1 < 0) {
+      $("#prompt").append("Can't go there fool!" + "<br>");
+      return false;
+    }
+    var canMove = checkArea(hero.currentPosition.x + 1, hero.currentPosition.y);
+    if (canMove) {
+      area[hero.currentPosition.y][hero.currentPosition.x] = 1;
+      $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+      hero.currentPosition.x += 1;
+      area[hero.currentPosition.y][hero.currentPosition.x] = 4;
+      $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+    } else {
+      //$("#promp").append('cant do that fool' + "<br>");
+      //$('#propt').append('')
+    }
+    break;
+  }
+});*/
+
 move = function(move) {
+  var wall = new Audio('assets/sound/wall.mp3');
   var temp = null;
   switch (move) {
     case "up":
-      if (hero.currentPosition.y-1 > 5 || hero.currentPosition.y-1 < 0) {
+      if (hero.currentPosition.y - 1 > 5 || hero.currentPosition.y - 1 < 0) {
+        wall.play();
         $("#prompt").append("Can't go there fool!" + "<br>");
         return false;
       }
-      var canMove = checkArea(hero.currentPosition.x,   hero.currentPosition.y-1);
+      var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y - 1);
       if (canMove) {
         if (!bossDefeated) {
           area[hero.currentPosition.y][hero.currentPosition.x] = 1;
-          $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+          $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
           hero.currentPosition.y -= 1;
           area[hero.currentPosition.y][hero.currentPosition.x] = 4;
-          $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
-        } else {
-        }
-      } else {
-      }
+          $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+        } else {}
+      } else {}
       break;
     case "down":
-      if (hero.currentPosition.y+1 > 4 || hero.currentPosition.y+1 < 0) {
+      if (hero.currentPosition.y + 1 > 4 || hero.currentPosition.y + 1 < 0) {
+        wall.play();
         $("#prompt").append("Can't go there fool!" + "<br>");
         return false;
       }
-      var canMove = checkArea(hero.currentPosition.x,   hero.currentPosition.y+1);
+      var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y + 1);
       if (canMove) {
         area[hero.currentPosition.y][hero.currentPosition.x] = 1;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+        $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
         hero.currentPosition.y += 1;
         area[hero.currentPosition.y][hero.currentPosition.x] = 4;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+        $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
       } else {
         //$("#prompt").append("Can't do that fool!"  + "<br>");
         //$('#propt').append('')
       }
       break;
     case "left":
-      if (hero.currentPosition.x-1 > 5 || hero.currentPosition.x-1 < 0) {
+      if (hero.currentPosition.x - 1 > 5 || hero.currentPosition.x - 1 < 0) {
+        wall.play();
         $("#prompt").append("Can't go there fool!" + "<br>");
         return false;
       }
-      var canMove = checkArea(hero.currentPosition.x-1,   hero.currentPosition.y);
+      var canMove = checkArea(hero.currentPosition.x - 1, hero.currentPosition.y);
       if (canMove) {
         area[hero.currentPosition.y][hero.currentPosition.x] = 1;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+        $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
         hero.currentPosition.x -= 1;
         area[hero.currentPosition.y][hero.currentPosition.x] = 4;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+        $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
       } else {
         // $("#prompt").append('cant do that fool' + "<br>");
         //$('#propt').append('')
       }
       break;
-    case "right":
-      if (hero.currentPosition.x+1 > 5 || hero.currentPosition.x+1 < 0) {
-        $("#prompt").append("Can't go there fool!" + "<br>");
-        return false;
-      }
-      var canMove = checkArea(hero.currentPosition.x+1,   hero.currentPosition.y);
-      if (canMove) {
-        area[hero.currentPosition.y][hero.currentPosition.x] = 1;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
-        hero.currentPosition.x += 1;
-        area[hero.currentPosition.y][hero.currentPosition.x] = 4;
-        $('#tile'+hero.currentPosition.y+hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
-      } else {
-        //$("#promp").append('cant do that fool' + "<br>");
-        //$('#propt').append('')
-      }
-      break;
+      case "right":
+        if (hero.currentPosition.x + 1 > 5 || hero.currentPosition.x + 1 < 0) {
+          wall.play();
+          $("#prompt").append("Can't go there fool!" + "<br>");
+          return false;
+        }
+        var canMove = checkArea(hero.currentPosition.x + 1, hero.currentPosition.y);
+        if (canMove) {
+          area[hero.currentPosition.y][hero.currentPosition.x] = 1;
+          $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\floor.png' alt='tile' width='40px'/>");
+          hero.currentPosition.x += 1;
+          area[hero.currentPosition.y][hero.currentPosition.x] = 4;
+          $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
+        } else {
+          //$("#promp").append('cant do that fool' + "<br>");
+          //$('#propt').append('')
+        }
+        break;
     default:
       $("#prompt").append("This command doesn't exist. Please try again." + "<br>");
   };
 };
-
 
 /*commands:
   move: forward | left | back | right
