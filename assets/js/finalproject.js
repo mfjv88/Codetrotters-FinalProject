@@ -1,5 +1,3 @@
-/*This is a Text based RPG Game*/
-
 $(document).ready(function() {
   $("#speakermute").hide()
   $('#close').hide();
@@ -10,8 +8,8 @@ $(document).ready(function() {
   $('#myModal').on('shown.bs.modal', function() {
     $('#myInput').focus()
   })
+
   $('#myModal').modal('show');
-  // $('.play').on('click', '.type-it', typeIt);
   $('.play').on('click', function() {
     $('.type-it').typeIt({
       strings: ['This is the story of a princess', 'that was captured by an evil orc.', 'The prince, Lazarus, came to the rescue.', 'Help Lazarus find his princess', 'by fighting the evil orc at this end of the stage!'],
@@ -21,9 +19,10 @@ $(document).ready(function() {
     }).after(function() {
       $('.play').hide();
       $('#close').show();
-      theme = new Audio('C:\\Users\\mvacas.GUAYACAN\\Desktop\\Codetrotters\\Final Project\\codetrotters-finalproject\\assets\\sound\\theme.mp3');
+      theme = new Audio('assets/sound/theme.mp3');
       theme.play();
       theme.volume = 0.3;
+      $("#prompt").scrollTop = $("#prompt").scrollHeight;
     });
   });
 
@@ -53,6 +52,11 @@ $(document).ready(function() {
     $(this).css("color", "white");
   });
 
+  if ($(window).width() < 768) {
+    $("#footer").css("position", "absolute");
+  } else {
+    $("#footer").css("position", "fixed");
+  };
 });
 
 var wall = new Audio('assets/sound/wall.mp3');
@@ -226,7 +230,7 @@ var checkArea = function(x, y) {
   } else {
     var wall = new Audio('assets/sound/wall.mp3');
     wall.play();
-    $("#prompt").append("Can't go there fool!" + "<br>");
+    $("#prompt").append("Can't go there!" + "<br>");
     return false;
   };
 };
@@ -250,7 +254,7 @@ var fight = function() {
 
 /*Mousetrap.bind('up', function() {
   if (hero.currentPosition.y - 1 > 5 || hero.currentPosition.y - 1 < 0) {
-    $("#prompt").append("Can't go there fool!" + "<br>");
+    $("#prompt").append("Can't go there!" + "<br>");
     return false;
   }
   var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y - 1);
@@ -269,7 +273,7 @@ var fight = function() {
 Mousetrap.bind({
   "right": function() {
     if (hero.currentPosition.x + 1 > 5 || hero.currentPosition.x + 1 < 0) {
-      $("#prompt").append("Can't go there fool!" + "<br>");
+      $("#prompt").append("Can't go there!" + "<br>");
       return false;
     }
     var canMove = checkArea(hero.currentPosition.x + 1, hero.currentPosition.y);
@@ -280,7 +284,7 @@ Mousetrap.bind({
       area[hero.currentPosition.y][hero.currentPosition.x] = 4;
       $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
     } else {
-      //$("#promp").append('cant do that fool' + "<br>");
+      //$("#promp").append('cant do that' + "<br>");
       //$('#propt').append('')
     }
     break;
@@ -290,11 +294,12 @@ Mousetrap.bind({
 move = function(move) {
   var wall = new Audio('assets/sound/wall.mp3');
   var temp = null;
+  $("#instructions").fadeOut("slow", "swing");
   switch (move) {
     case "up":
       if (hero.currentPosition.y - 1 > 5 || hero.currentPosition.y - 1 < 0) {
         wall.play();
-        $("#prompt").append("Can't go there fool!" + "<br>");
+        $("#prompt").append("Can't go there!" + "<br>");
         return false;
       }
       var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y - 1);
@@ -311,7 +316,7 @@ move = function(move) {
     case "down":
       if (hero.currentPosition.y + 1 > 4 || hero.currentPosition.y + 1 < 0) {
         wall.play();
-        $("#prompt").append("Can't go there fool!" + "<br>");
+        $("#prompt").append("Can't go there!" + "<br>");
         return false;
       }
       var canMove = checkArea(hero.currentPosition.x, hero.currentPosition.y + 1);
@@ -322,14 +327,12 @@ move = function(move) {
         area[hero.currentPosition.y][hero.currentPosition.x] = 4;
         $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
       } else {
-        //$("#prompt").append("Can't do that fool!"  + "<br>");
-        //$('#propt').append('')
       }
       break;
     case "left":
       if (hero.currentPosition.x - 1 > 5 || hero.currentPosition.x - 1 < 0) {
         wall.play();
-        $("#prompt").append("Can't go there fool!" + "<br>");
+        $("#prompt").append("Can't go there!" + "<br>");
         return false;
       }
       var canMove = checkArea(hero.currentPosition.x - 1, hero.currentPosition.y);
@@ -340,14 +343,12 @@ move = function(move) {
         area[hero.currentPosition.y][hero.currentPosition.x] = 4;
         $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
       } else {
-        // $("#prompt").append('cant do that fool' + "<br>");
-        //$('#propt').append('')
       }
       break;
       case "right":
         if (hero.currentPosition.x + 1 > 5 || hero.currentPosition.x + 1 < 0) {
           wall.play();
-          $("#prompt").append("Can't go there fool!" + "<br>");
+          $("#prompt").append("Can't go there!" + "<br>");
           return false;
         }
         var canMove = checkArea(hero.currentPosition.x + 1, hero.currentPosition.y);
@@ -358,46 +359,9 @@ move = function(move) {
           area[hero.currentPosition.y][hero.currentPosition.x] = 4;
           $('#tile' + hero.currentPosition.y + hero.currentPosition.x).html("<img src='assets\\images\\link.gif' alt='hero' width='40px'/>");
         } else {
-          //$("#promp").append('cant do that fool' + "<br>");
-          //$('#propt').append('')
         }
         break;
     default:
       $("#prompt").append("This command doesn't exist. Please try again." + "<br>");
   };
 };
-
-/*commands:
-  move: forward | left | back | right
-  equip: <item>
-  inventory: <items>
-  run
-  fight
-  loot
-  help
-
-items:
-  type: permanent | consumables
-  name: <string>
-  power: <number>
-  defense: <number>
-
-npc:
-  type: goblin | orc
-  hit_points: <number>
-  power: <number>
-  defense: <number>
-  special: <number>
-  name: <string>
-  items: <array of items>
-
-hero:
-  hit_points: <number>
-  power: <number>
-  defense: <number>
-  special: <number>
-  name: <string>
-  action: attack | use | look
-
-location:
-  area: <array of numbers>*/

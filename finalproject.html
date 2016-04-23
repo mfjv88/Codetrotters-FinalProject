@@ -11,7 +11,7 @@
   <script type="text/javascript" src="assets/js/finalproject.js"></script>
   <script type="text/javascript" src="assets/js/mousetrap.min.js"></script>
   <script type="text/javascript" src="assets/js/mousetrap-bind-dictionary.min.js"></script>
-  <link rel="icon" href="assets/images/lazarusfav.png" type="image/x-icon"/>
+  <link rel="icon" href="assets/images/lazarusfav.png" type="image/x-icon" />
   <link rel="stylesheet" href="assets/css/bootstrap.css">
   <link rel="stylesheet" href="assets/css/finalproject.css">
 </head>
@@ -20,7 +20,7 @@
   <div class="container-fluid">
     <div id="nav" class="row">
       <div id="logo" class="col-xs-2 col-md-2 col-lg-1">
-        <span><img src="assets/images/lazarus.png" alt="lazaruslogo" height="40px" /></span>
+        <span><img src="assets/images/lazarus-Recovered.png" alt="lazaruslogo" height="40px" /></span>
       </div>
       <div class="col-xs-2 col-xs-offset-4 col-md-1 col-md-offset-7 col-lg-offset-8 nav-items">
         <span>Sign in</span>
@@ -123,60 +123,72 @@
             </div>
           </div>
         </div>
-          <!--Here are the controls-->
-          <div id="controls" class="container-fluid">
-            <div class="row">
-              <div class="col-xs-12 frame">
-                <div class="row">
-                  <div class="col-xs-1 col-xs-offset-5">
-                    <button id="up" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('up')">⇧</button>
-                  </div>
+        <!--Here are the controls-->
+        <div id="controls" class="container-fluid">
+          <div class="row">
+            <div class="col-xs-12 frame">
+              <div class="row">
+                <div class="col-xs-1 col-xs-offset-5">
+                  <button id="up" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('up')">⇧</button>
                 </div>
-                <div class="row">
-                  <div class="col-xs-1 col-xs-offset-3">
-                    <button id="left" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('left')">⇦</button>
-                  </div>
-                  <div class="col-xs-1 col-xs-offset-3">
-                    <button id="right" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('right')">⇨</button>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-1 col-xs-offset-3">
+                  <button id="left" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('left')">⇦</button>
                 </div>
-                <div class="row">
-                  <div class="col-xs-1 col-xs-offset-5">
-                    <button id="down" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('down')">⇩</button>
-                  </div>
+                <div class="col-xs-1 col-xs-offset-3">
+                  <button id="right" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('right')">⇨</button>
                 </div>
-                <br>
-                <div class="attacking row">
-                  <div class="col-xs-1">
-                    <button type="button" id="battle" class="btn btn-primary btn-lg active" name="button" onclick="fight()">Battle</button>
-                  </div>
-                  <div class="col-xs-1 col-xs-offset-2">
-                    <button type="button" id="flee" class="btn btn-primary btn-lg active" name="button" onclick="flee()">Flee</button>
-                  </div>
-                  <div class="col-xs-1 col-xs-offset-2">
-                    <button type="button" id="attack" class="btn btn-primary btn-lg active" name="button" onclick="">Attack</button>
-                  </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-1 col-xs-offset-5">
+                  <button id="down" type="button" class="btn btn-primary btn-lg active" name="button" onclick="move('down')">⇩</button>
+                </div>
+              </div>
+              <br>
+              <div class="attacking row">
+                <div class="col-xs-1">
+                  <button type="button" id="battle" class="btn btn-primary btn-lg active" name="button" onclick="fight()">Battle</button>
+                </div>
+                <div class="col-xs-1 col-xs-offset-2">
+                  <button type="button" id="flee" class="btn btn-primary btn-lg active" name="button" onclick="flee()">Flee</button>
+                </div>
+                <div class="col-xs-1 col-xs-offset-2">
+                  <button type="button" id="attack" class="btn btn-primary btn-lg active" name="button" onclick="">Attack</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-11 col-xs-offset-1">
+            <span id="instructions"> ⬑ Use the buttons to move character </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div id="footer" class="row">
+  </div>
+  <div id='footer' class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12">
+        <span id="copyright"> I do not own any of the copyright material on this page.
+      </div>
+    </div>
+    <div id="footer-bar" class="row">
       <div class="col-xs-5 col-lg-3">
         <span>This is a project for and made thanks to the help of <br> <a href="http://www.codetrotters.com" target="_blank" class="footerItems"> <img src="assets/images/codeTrotters.png" alt="codetrotters" height="40px"/> </a> </span>
       </div>
       <div class="col-xs-1 col-xs-offset-3 col-lg-1 col-lg-offset-6">
-        <a href="http://twitter.com/mfjv88" class="footerItems" target="_blank"><img src="assets/images/Twitterbird.png" alt="twitter" height="40px"/> </a>
+        <a href="http://twitter.com/mfjv88" class="footerItems" target="_blank"><img src="assets/images/Twitterbird.png" alt="twitter" height="40px" /> </a>
       </div>
       <div class="col-xs-1 col-lg-1">
-        <a href="http://github.com/mfjv88" class="footerItems" target="_blank"><img src="assets/images/github.png" alt="github" height="40px"/> </a>
+        <a href="http://github.com/mfjv88" class="footerItems" target="_blank"><img src="assets/images/github.png" alt="github" height="40px" /> </a>
       </div>
       <div class="col-xs-2 col-lg-1">
-        <span id="contact" class="footerItems"><a href="mailto:mfjvacas@gmail.com">Contact us!</a></span>
+        <span id="contact"><a href="mailto:mfjvacas@gmail.com">Contact us!</a></span>
       </div>
     </div>
   </div>

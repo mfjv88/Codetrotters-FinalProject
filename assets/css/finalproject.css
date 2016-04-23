@@ -5,9 +5,6 @@ body{
 .frame {
   border: double;
   background-color: rgba(255, 255, 255, 0.5);
-  /*flex: auto;
-  justify-content: space-between;*/
-  /*transform: translate(-50px, -50px);*/
 }
 
 #main {
@@ -15,11 +12,7 @@ body{
 }
 
 #grid {
-  /*position: relative;
-  min-width: 500px;
-  max-width: 1500px;*/
   float: none;
-  /*text-align: center;*/
   height: 100%;
 }
 
@@ -66,16 +59,33 @@ overflow-y: scroll;
   padding: 0px;
 }
 
-#footer {
-  display: flex;
-  align-items: center;
-  background-color: rgba(255, 0, 0, 0.5);
+#instructions {
+  color: white;
   font-size: 18px;
+}
+
+#footer {
   color: white;
   position: fixed;
   bottom: 0px;
   width: 100%;
+}
+
+#footer-bar {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 0, 0, 0.5);
+  font-size: 18px;
   height: 80px;
+}
+
+#footer a:link {
+  text-decoration: none;
+  color: white;
+}
+
+#footer > div > span > a:hover, a:visited {
+  color: grey;
 }
 
 .footerItems {
